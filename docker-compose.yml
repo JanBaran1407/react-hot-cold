@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  building:
+    build: ./building
+    networks:
+      - network
+    image: react-hot-cold:latest
+    volumes:
+    - artefakty:/react-hot-cold/build
+  test:
+    build: ./test
+    networks:
+      - network
+    depends_on:
+      - building
+
+networks:
+  network:
+    driver: bridge
